@@ -1,0 +1,91 @@
+<template>
+    <template if:true={showSpinner}>
+        <lightning-card title="Casos da COVID-19 confirmados no Brasil" icon-name="standard:record" variant="base">
+            <div class="slds-card__body_inner">
+                <div class="finder-spinner">
+                    <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+
+    <template if:false={showSpinner}>
+
+        <lightning-card title="Casos da COVID-19 confirmados no Brasil" icon-name="standard:record" variant="base">
+            <div slot="actions">
+                <!--<lightning-button class="slds-theme_brand" variant="neutral" label="Voltar"></lightning-button>-->
+            </div>
+            <div class="slds-card__body_inner">
+
+                <div class="slds-m-around_medium line-items-table">
+                    <table class="covid-data">
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                        <template for:each={covidCases} for:item="covidCase" for:index="covidCasePosition">
+
+                            <tr key={covidCase.City_IBGE_Code__c}>
+                                <td style="width:7%">
+                                    <lightning-input class="input-field"
+                                                     label="cidade"
+                                                     value={covidCase.City__c}
+                                                     disabled>
+                                    </lightning-input>
+                                </td>
+
+                                <td style="width:7%">
+                                    <lightning-input class="input-field"
+                                                     label="estado"
+                                                     value={covidCase.State__c}
+                                                     disabled>
+                                    </lightning-input>
+                                </td>
+
+                                <td style="width:7%">
+                                    <lightning-input class="input-field"
+                                                     label="casos confirmados"
+                                                     value={covidCase.Confirmed__c}
+                                                     disabled>
+                                    </lightning-input>
+                                </td>
+
+                                <td style="width:7%">
+                                    <lightning-input class="input-field"
+                                                     label="casos confirmados a cada 100 mil habitantes"
+                                                     value={covidCase.Confirmed_Per_100k_In_Habitants__c}
+                                                     disabled>
+                                    </lightning-input>
+                                </td>
+
+                                <td style="width:7%">
+                                    <lightning-input class="input-field"
+                                                     label="mortes"
+                                                     value={covidCase.Deaths__c}
+                                                     disabled>
+                                    </lightning-input>
+                                </td>
+
+                                <td style="width:7%">
+                                    <lightning-input class="input-field"
+                                                     label="populacao estimada em 2019"
+                                                     value={covidCase.Estimated_Population_2019__c}
+                                                     disabled>
+                                    </lightning-input>
+                                </td>
+
+                            </tr>
+
+                        </template>
+
+
+                    </table>
+                </div>
+            </div>
+        </lightning-card>
+
+    </template>
+</template>
